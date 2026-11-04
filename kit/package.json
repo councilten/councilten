@@ -1,0 +1,32 @@
+{
+  "name": "council-kit",
+  "version": "0.1.0",
+  "description": "The multi-agent kit for Solana. Pay in USDC; ask Venice, Claude, GPT, Grok and Gemini from one wallet. CLI, MCP server, x402 payments, budgets.",
+  "type": "module",
+  "bin": { "council": "dist/cli.js" },
+  "files": ["dist", "SKILL.md", "README.md", "LICENSE"],
+  "engines": { "node": ">=20" },
+  "license": "MIT",
+  "keywords": ["solana", "x402", "usdc", "mcp", "agent", "venice", "llm", "cli"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test --test-reporter=spec test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "@solana-program/system": "^0.16.0",
+    "@solana-program/token": "^0.16.0",
+    "@solana-program/token-2022": "^0.16.0",
+    "@solana/kit": "^8.6.0",
+    "@x402/core": "~2.30.0",
+    "@x402/extensions": "~2.30.0",
+    "@x402/svm": "~2.30.0",
+    "zod": "^4.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3"
+  }
+}
