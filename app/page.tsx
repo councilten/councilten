@@ -5,6 +5,8 @@ import { Command } from "@/components/Copy";
 import { Chamber, type ChamberSeat } from "@/components/Chamber";
 import { Flow } from "@/components/Flow";
 import { Mark } from "@/components/Mark";
+import { HeroTurbine } from "@/components/HeroTurbine";
+import { Pricer } from "@/components/Pricer";
 import { commands, env } from "@/lib/site";
 import { getCatalog, seatCost } from "@/lib/models";
 
@@ -50,6 +52,8 @@ export default async function Home() {
   const seats: ChamberSeat[] = live.map((s) => ({ label: s.alias, id: s.model!.id, ms: PACE[s.alias] ?? 2000, usd: seatCost(s.model) }));
   const judgeModel = cat.seats.find((s) => s.alias === "claude")?.model ?? live[0]?.model ?? null;
   const judge: ChamberSeat = { label: "judge", id: judgeModel?.id ?? "claude", ms: 2400, usd: seatCost(judgeModel, 2400, 320) };
+  const heroSeats = cat.seats.map((s) => ({ alias: s.alias, label: s.label, id: s.model?.id ?? null, provider: s.model?.provider ?? null, input: s.model?.input ?? null, output: s.model?.output ?? null }));
+  const priceSeats = live.map((s) => ({ alias: s.alias, label: s.label, id: s.model!.id, input: s.model!.input, output: s.model!.output, minimum: s.model!.minimum ?? 0 }));
   const worst = live.reduce((a, s) => a + seatCost(s.model, 60, 700), 0) + seatCost(judgeModel, 60 + live.length * 700, 1050);
 
   return (
@@ -84,7 +88,26 @@ export default async function Home() {
                 <span>10 model families</span><span>budgets</span><span>on-chain ledger</span><span>open source</span>
               </div>
             </div>
+            <div className="hero-mark">
+              <HeroTurbine seats={heroSeats} />
+            </div>
+          </div>
+        </section>
+
+        <section className="sec run" id="run">
+          <div className="wrap run-grid">
             <div>
+              <span className="label">01 · A run</span>
+              <h2 className="h2" style={{ marginTop: 18 }}>Ask once. Ten answer.</h2>
+              <p className="sec-sub">One question goes to every seat at the same moment. Each blade that lights is a seat that answered and was paid for. The judge reads them all and writes one answer, then names the point they split on.</p>
+              <ol className="run-notes">
+                <li><span className="num">01</span>Priced at its worst case before the first call.</li>
+                <li><span className="num">02</span>Seats answer in parallel, none sees another.</li>
+                <li><span className="num">03</span>The judge decides on the merits, not by vote.</li>
+                <li><span className="num">04</span>The receipt: what it cost, against what you allowed.</li>
+              </ol>
+            </div>
+            <div className="run-panel">
               {seats.length >= 2 ? (
                 <Chamber
                   question="Should an agent prepay credit or pay per call?"
@@ -106,7 +129,7 @@ export default async function Home() {
         <section className="sec" id="start">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">01 · Start</span>
+              <span className="label">02 · Start</span>
               <div>
                 <h2 className="h2">One wallet. Three commands.</h2>
                 <p className="sec-sub">Node 20 or newer. Nothing to sign up for, no API key, no account. The wallet is the login and the payment.</p>
@@ -144,7 +167,7 @@ export default async function Home() {
         <section className="sec" id="models">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">02 · The table</span>
+              <span className="label">03 · The table</span>
               <div>
                 <h2 className="h2">Ten seats. Every one live.</h2>
                 <p className="sec-sub">Each alias resolves to the newest model in its family, read from the Venice and BlockRun catalogs every ten minutes. The CLI resolves them the same way.</p>
@@ -186,10 +209,23 @@ export default async function Home() {
           </div>
         </section>
 
+        <section className="sec" id="price">
+          <div className="wrap">
+            <div className="sec-head">
+              <span className="label">04 · Price it</span>
+              <div>
+                <h2 className="h2">Know the bill before the question.</h2>
+                <p className="sec-sub">Set the table and the limits. This is the CLI&apos;s own estimate, run in your browser on today&apos;s prices: if the worst case is over budget, the kit refuses before it signs anything.</p>
+              </div>
+            </div>
+            {priceSeats.length ? <div className="indent"><Pricer seats={priceSeats} /></div> : null}
+          </div>
+        </section>
+
         <section className="sec" id="how">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">03 · How it decides</span>
+              <span className="label">05 · How it decides</span>
               <div>
                 <h2 className="h2">Priced first. Then paid.</h2>
               </div>
@@ -209,7 +245,7 @@ export default async function Home() {
         <section className="sec" id="mcp">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">04 · For agents</span>
+              <span className="label">06 · For agents</span>
               <div>
                 <h2 className="h2">Tools your agent gets.</h2>
                 <p className="sec-sub">The local MCP server gives Claude Code, Cursor, Codex or any MCP client the same tools as the CLI. Reads need nothing. Spending stays inside your budgets.</p>
@@ -233,7 +269,7 @@ export default async function Home() {
         <section className="sec" id="limits">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">05 · Guardrails</span>
+              <span className="label">07 · Guardrails</span>
               <div>
                 <h2 className="h2">Hard limits, enforced before signing.</h2>
               </div>
@@ -290,7 +326,7 @@ export default async function Home() {
         <section className="sec" id="faq">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">06 · Questions</span>
+              <span className="label">08 · Questions</span>
               <div><h2 className="h2">Asked before you ask.</h2></div>
             </div>
             <div className="faq">
@@ -307,7 +343,7 @@ export default async function Home() {
         <section className="sec" id="changes">
           <div className="wrap">
             <div className="sec-head">
-              <span className="label">07 · What changed</span>
+              <span className="label">09 · What changed</span>
               <div><h2 className="h2">Changelog.</h2></div>
             </div>
             <ul className="log">
