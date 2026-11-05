@@ -4,7 +4,7 @@ import { env } from "@/lib/site";
 
 const short = (a: string) => `${a.slice(0, 4)}…${a.slice(-4)}`;
 
-export function Header({ current }: { current?: "docs" | "ledger" }) {
+export function Header({ current }: { current?: "docs" | "ledger" | "ask" }) {
   return (
     <header className="hdr">
       <a className="skip" href="#main">Skip to content</a>
@@ -14,6 +14,7 @@ export function Header({ current }: { current?: "docs" | "ledger" }) {
           <Wordmark />
         </Link>
         <nav className="nav" aria-label="Main">
+          <Link href="/ask" className="keep nav-ask" aria-current={current === "ask" ? "page" : undefined}>ask</Link>
           <Link href="/docs" className="keep" aria-current={current === "docs" ? "page" : undefined}>docs</Link>
           <Link href="/#models">models</Link>
           <Link href="/ledger" aria-current={current === "ledger" ? "page" : undefined}>ledger</Link>

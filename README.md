@@ -47,6 +47,30 @@ npm run build
 
 Public endpoints: `/api/models` (seats, models and live prices), `/api/token` (the mint, read from chain), `/llms.txt`, `/skill.md`.
 
+### Hosted councils (`/ask`)
+
+Visitors connect a Solana wallet (Wallet Standard: Phantom, Solflare, Backpack), see a fixed price, and approve one USDC transfer to the council's wallet. The server verifies that transfer on chain (amount, destination, payer and the quote's memo), then the council's own wallet pays every model over x402 and the answers stream back. No API keys anywhere.
+
+- Price: the CLI's worst case for the chosen seats and answer length, plus the table fee (`HOSTED_MARKUP_BPS`), rounded up to $0.001.
+- Every payment runs one council only (memo-bound quote, claimed once in Redis). Forged or expired quotes, a different question, or a smaller payment are refused.
+- If no seat answers, the visitor is refunded in full automatically (the wallet needs a little SOL for that).
+- Venice credit is topped up from the wallet's USDC when it runs low (`HOSTED_VENICE_TOPUP_USD`).
+- Limits: `HOSTED_MAX_USD` per question, `HOSTED_WALLET_HOURLY` councils per wallet per hour.
+
+| Variable | Needed | Meaning |
+|---|---|---|
+| `HOSTED_ENABLED` | to open | `1` opens the table |
+| `COUNCIL_WALLET_KEY` | to open | the council's hot wallet secret; keep only the float in it |
+| `KV_REST_API_URL`, `KV_REST_API_TOKEN` | to open | Upstash Redis (Vercel Storage integration), or `UPSTASH_REDIS_REST_*` |
+| `SOLANA_RPC_URL` | to open | a Helius or Triton URL; also used by the ledger |
+| `HOSTED_MARKUP_BPS` | optional | table fee, default 1500 (15%) |
+| `HOSTED_MAX_USD` | optional | max price per question, default 0.5 |
+| `HOSTED_WALLET_HOURLY` | optional | councils per wallet per hour, default 20 |
+| `HOSTED_VENICE_TOPUP_USD` | optional | Venice refill size, default 5 |
+| `HOSTED_HOLDER_DISCOUNT_BPS`, `HOSTED_HOLDER_MIN` | optional | holder discount on the fee (off by default) |
+
+Tests: `node test/hosted.e2e.mjs` builds the site and runs 13 end-to-end checks against mocks of Solana, Venice and BlockRun; `python3 test/ask_ui.py` drives `/ask` with a test wallet (see the file header).
+
 ## Security
 
 The private key never leaves the user's machine. The kit is not audited; keep small balances in the agent wallet.

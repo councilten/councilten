@@ -121,6 +121,7 @@ export async function startMock() {
         state.topups.push(chk);
         return send(200, { success: true, balanceUsd: state.credit }, { "PAYMENT-RESPONSE": b64({ success: true, transaction: "5VeniceTopupSig", network: SOL_NET }) });
       }
+      if (state.failChats && (url.pathname === "/venice/chat/completions" || url.pathname === "/blockrun/v1/chat/completions")) return send(503, { error: "upstream unavailable" });
       if (url.pathname === "/venice/chat/completions") {
         const a = await checkSiwx(req, url);
         if (!a.ok) return send(401, { error: a.why });

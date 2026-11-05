@@ -14,13 +14,13 @@ The multi-agent kit for Solana. One wallet, one USDC balance, ten model families
 Node 20 or newer.
 
 ```
-npx https://usecouncil.app/downloads/council-kit-0.1.0.tgz init
+npx https://councilten.com/downloads/council-kit-0.1.0.tgz init
 ```
 
 Or install it once and use `council` everywhere:
 
 ```
-npm install -g https://usecouncil.app/downloads/council-kit-0.1.0.tgz
+npm install -g https://councilten.com/downloads/council-kit-0.1.0.tgz
 ```
 
 This writes a keypair to `~/.council/wallet.json` (mode 600) and prints the address. Send it USDC on Solana.

@@ -4,6 +4,11 @@ const config: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   outputFileTracingIncludes: { "/skill.md": ["./kit/SKILL.md"], "/llms.txt": ["./kit/SKILL.md"] },
+  // The kit is Node ESM: its sources import "./x.js" for "./x.ts". Webpack maps that like TypeScript does.
+  webpack(cfg) {
+    cfg.resolve.extensionAlias = { ".js": [".ts", ".js"] };
+    return cfg;
+  },
   async headers() {
     return [
       {

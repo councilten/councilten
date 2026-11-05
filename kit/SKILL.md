@@ -38,7 +38,7 @@ An exact model is `venice:<id>` or `blockrun:<id>`.
 Add it to any MCP client:
 
 ```
-claude mcp add council -- npx -y https://usecouncil.app/downloads/council-kit-0.1.0.tgz mcp
+claude mcp add council -- npx -y https://councilten.com/downloads/council-kit-0.1.0.tgz mcp
 ```
 
 Tools: council_status, council_models, council_ask, council_convene, council_fund, council_pay, council_ledger,

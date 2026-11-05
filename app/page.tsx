@@ -79,8 +79,8 @@ export default async function Home() {
               <div className="hero-actions">
                 <Command text={cmd.init} />
                 <div className="row">
-                  <Link className="btn btn-primary" href="/docs">Read the docs</Link>
-                  <a className="btn btn-quiet" href="#mcp">Add to Claude Code</a>
+                  <Link className="btn btn-primary" href="/ask">Ask the council</Link>
+                  <Link className="btn btn-quiet" href="/docs">Read the docs</Link>
                 </div>
               </div>
               <div className="spec" aria-label="What it is built on">
@@ -347,6 +347,12 @@ export default async function Home() {
               <div><h2 className="h2">Changelog.</h2></div>
             </div>
             <ul className="log">
+              <li>
+                <time dateTime="2026-11-05">Nov 5, 2026</time>
+                <div>
+                  Hosted councils at <Link href="/ask">/ask</Link>. Connect a Solana wallet, see one fixed price, approve one USDC payment, and up to ten models answer with a judge&apos;s verdict. The council&apos;s wallet pays every model over x402; each payment is verified on chain and runs exactly one council, and if no seat answers the payment is refunded automatically.
+                </div>
+              </li>
               <li>
                 <time dateTime="2026-11-04">Nov 4, 2026</time>
                 <div>
