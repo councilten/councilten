@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { BLADES } from "@/lib/mark";
+import { Logo } from "./Logo";
 
 export interface ChamberSeat {
   label: string;
@@ -93,7 +94,7 @@ export function Chamber({ question, seats, judge, answer, split, budget, worstCa
         <ul className="seats">
           {seats.map((s, i) => (
             <li key={`${run}-${s.label}`} data-on={done[i] || undefined} data-flash={done[i] && t < s.ms + 450 ? true : undefined}>
-              <span className="n">{s.label}</span>
+              <span className="n"><Logo k={s.label} size={15} />{s.label}</span>
               <span className="id">{s.id}</span>
               <span className="t num">{done[i] ? secs(s.ms) : <i className="wait" />}</span>
               <span className="c num">{done[i] ? fmt(s.usd) : ""}</span>

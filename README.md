@@ -47,6 +47,10 @@ npm run build
 
 Public endpoints: `/api/models` (seats, models and live prices), `/api/token` (the mint, read from chain), `/llms.txt`, `/skill.md`.
 
+### Logos
+
+Provider and network logos live in `public/logos` (`<key>.png`, plus `<key>-dark.png` where the mark is black) and render through `components/Logo.tsx` in the hero, the logo band, the model table, the example run, the pricer, the flow diagram, the docs and `/ask`. They are prepared from the team's source files with `python3 scripts/logos.py <folder>` (white backgrounds cleared, trimmed, centred, 96 px).
+
 ### Hosted councils (`/ask`)
 
 Visitors connect a Solana wallet (Wallet Standard: Phantom, Solflare, Backpack), see a fixed price, and approve one USDC transfer to the council's wallet. The server verifies that transfer on chain (amount, destination, payer and the quote's memo), then the council's own wallet pays every model over x402 and the answers stream back. No API keys anywhere.

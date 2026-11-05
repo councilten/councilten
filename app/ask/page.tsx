@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Ask, type AskSeat } from "@/components/Ask";
+import { Logo } from "@/components/Logo";
 import { getCatalog } from "@/lib/models";
 import { hosted, readiness } from "@/lib/hosted/config";
 
@@ -39,8 +40,8 @@ export default async function AskPage() {
             </div>
             <Ask seats={seats} judge={judge} markupBps={hosted.markupBps} maxUsd={hosted.maxUsd} open={ready.ok} closedReason={ready.why} />
             <ol className="ask-how">
-              <li><span className="num">01</span><div><b>Pay once</b><p>One USDC transfer from your wallet to the council&apos;s wallet, at a fixed price you see first.</p></div></li>
-              <li><span className="num">02</span><div><b>Every seat answers</b><p>The council&apos;s wallet pays each model over x402 on Solana. No seat sees another.</p></div></li>
+              <li><span className="num">01</span><div><b>Pay once <Logo k="usdc" size={16} /><Logo k="solana" size={14} /></b><p>One USDC transfer from your wallet to the council&apos;s wallet, at a fixed price you see first.</p></div></li>
+              <li><span className="num">02</span><div><b>Every seat answers <Logo k="x402" size={13} /></b><p>The council&apos;s wallet pays each model over x402 on Solana. No seat sees another.</p></div></li>
               <li><span className="num">03</span><div><b>One verdict</b><p>The judge keeps what holds up, drops what doesn&apos;t, and tells you where they disagreed.</p></div></li>
             </ol>
             <p className="ask-kit">Running your own agent? The <Link href="/docs">kit</Link> does the same from your terminal or any MCP client, paid from your own wallet.</p>

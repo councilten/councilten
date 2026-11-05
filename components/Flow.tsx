@@ -1,4 +1,5 @@
 const SEATS = ["venice", "claude", "gpt", "grok", "gemini", "deepseek", "kimi", "qwen", "glm", "mistral"];
+const DARK = new Set(["venice", "gpt", "grok", "kimi", "glm"]);
 
 /** How a run moves: priced first, then the seats in parallel, then one judge, then one answer. */
 export function Flow() {
@@ -29,7 +30,8 @@ export function Flow() {
       ))}
       {SEATS.map((s, i) => (
         <g key={s}>
-          <rect className="bl" x={sx} y={ys[i] - 8} width="16" height="16" rx="3" opacity={0.55 + i * 0.045} />
+          <image className={DARK.has(s) ? "svg-l has-dark" : "svg-l"} href={`/logos/${s}.png`} x={sx} y={ys[i] - 8} width="16" height="16" />
+          {DARK.has(s) && <image className="svg-d" href={`/logos/${s}-dark.png`} x={sx} y={ys[i] - 8} width="16" height="16" />}
           <text x={sx + 24} y={ys[i] + 4}>{s}</text>
         </g>
       ))}

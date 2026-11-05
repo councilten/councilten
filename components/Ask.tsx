@@ -4,6 +4,7 @@ import type { WalletAccount } from "@wallet-standard/base";
 import { BLADES } from "@/lib/mark";
 import { ANSWER_LENGTHS, chargeUnits, councilCost, fmtUsd, usdOfUnits, type AnswerLength, type PriceModel } from "@/lib/hosted/price";
 import { connect, disconnect, listWallets, onWallets, signAndSend, type SolanaWallet } from "@/lib/wallet-client";
+import { Logo } from "./Logo";
 
 export interface AskSeat {
   alias: string;
@@ -232,6 +233,7 @@ export function Ask({ seats, judge, markupBps, maxUsd, open: openAtRender, close
             {seats.map((s) => (
               <button key={s.alias} type="button" className="ask-seat" disabled={!s.model || busy} aria-pressed={on.includes(s.alias)} onClick={() => toggle(s.alias)}>
                 <i aria-hidden="true" />
+                <Logo k={s.alias} size={22} className="ask-seat-logo" />
                 <b>{s.label}</b>
                 <span className="num">{s.model ? s.model.id.replace(/^[a-z-]+\//, "") : "unavailable"}</span>
               </button>
@@ -251,7 +253,7 @@ export function Ask({ seats, judge, markupBps, maxUsd, open: openAtRender, close
         <div className="ask-price">
           <div>
             <span className="label">Fixed price</span>
-            <div className="ask-usd num">{price ? fmtUsd(price) : "—"}</div>
+            <div className="ask-usd num"><Logo k="usdc" size={30} />{price ? fmtUsd(price) : "—"}</div>
           </div>
           <p>Set before you pay, in USDC. Includes a {(markupBps / 100).toFixed(0)}% table fee.{price && price > maxUsd ? ` Above the ${fmtUsd(maxUsd)} limit: drop a seat or pick shorter answers.` : ""}</p>
         </div>
@@ -304,7 +306,7 @@ export function Ask({ seats, judge, markupBps, maxUsd, open: openAtRender, close
           <div>
             <span className="ask-status" data-phase={phase}>{status}</span>
             {receipt && (
-              <a className="ask-receipt num" href={`https://solscan.io/tx/${receipt.tx}`} target="_blank" rel="noopener">Paid {fmtUsd(receipt.usd)} USDC · view payment</a>
+              <a className="ask-receipt num" href={`https://solscan.io/tx/${receipt.tx}`} target="_blank" rel="noopener"><Logo k="usdc" size={13} />Paid {fmtUsd(receipt.usd)} USDC · view payment</a>
             )}
           </div>
         </div>
@@ -319,7 +321,7 @@ export function Ask({ seats, judge, markupBps, maxUsd, open: openAtRender, close
               <li key={a} data-s={st}>
                 <button type="button" disabled={!can} aria-expanded={opened === a} onClick={() => setOpened(opened === a ? null : a)}>
                   <i aria-hidden="true" />
-                  <b>{s.label}</b>
+                  <b><Logo k={a} size={16} />{s.label}</b>
                   <span className="num m">{(r?.model ?? s.model?.id ?? "").replace(/^[a-z-]+\//, "")}</span>
                   <span className="num t">{st === "ok" ? secs(r!.ms!) : st === "fail" ? "no answer" : st === "waiting" ? "thinking" : ""}</span>
                 </button>

@@ -7,6 +7,7 @@ import { Flow } from "@/components/Flow";
 import { Mark } from "@/components/Mark";
 import { HeroTurbine } from "@/components/HeroTurbine";
 import { Pricer } from "@/components/Pricer";
+import { Logo } from "@/components/Logo";
 import { commands, env } from "@/lib/site";
 import { getCatalog, seatCost } from "@/lib/models";
 
@@ -84,12 +85,31 @@ export default async function Home() {
                 </div>
               </div>
               <div className="spec" aria-label="What it is built on">
-                <span>x402</span><span>USDC on Solana</span><span>CLI</span><span>MCP server</span>
+                <span><Logo k="x402" size={12} title="x402" /></span><span><Logo k="usdc" size={13} /><Logo k="solana" size={12} />USDC on Solana</span><span>CLI</span><span>MCP server</span>
                 <span>10 model families</span><span>budgets</span><span>on-chain ledger</span><span>open source</span>
               </div>
             </div>
             <div className="hero-mark">
               <HeroTurbine seats={heroSeats} />
+            </div>
+          </div>
+        </section>
+
+        <section className="band" aria-label="Who sits at the table and what pays for it">
+          <div className="wrap band-in">
+            <div className="band-row">
+              <span className="label">At the table</span>
+              <ul>
+                {cat.seats.map((s) => <li key={s.alias}><Logo k={s.alias} size={20} />{s.label}</li>)}
+              </ul>
+            </div>
+            <div className="band-row">
+              <span className="label">Paid with</span>
+              <ul>
+                <li><Logo k="usdc" size={20} />USDC</li>
+                <li><Logo k="solana" size={18} />Solana</li>
+                <li><Logo k="x402" size={16} title="x402" /></li>
+              </ul>
             </div>
           </div>
         </section>
@@ -187,7 +207,7 @@ export default async function Home() {
                       {cat.seats.map((s) => (
                         <tr key={s.alias}>
                           <td className="a">{s.alias}</td>
-                          <td className="fam">{s.label}</td>
+                          <td className="fam"><Logo k={s.alias} size={18} />{s.label}</td>
                           <td>{s.model?.id ?? <span className="muted">unavailable</span>}</td>
                           <td>{s.model && <span className="via" data-p={s.model.provider}>{s.model.provider}</span>}</td>
                           <td className="r num">{s.model ? s.model.input.toFixed(2) : "—"}</td>
@@ -350,7 +370,7 @@ export default async function Home() {
               <li>
                 <time dateTime="2026-11-05">Nov 5, 2026</time>
                 <div>
-                  Hosted councils at <Link href="/ask">/ask</Link>. Connect a Solana wallet, see one fixed price, approve one USDC payment, and up to ten models answer with a judge&apos;s verdict. The council&apos;s wallet pays every model over x402; each payment is verified on chain and runs exactly one council, and if no seat answers the payment is refunded automatically.
+                  Hosted councils at <Link href="/ask">/ask</Link>. Connect a Solana wallet, see one fixed price, approve one USDC payment, and up to ten models answer with a judge&apos;s verdict. The council&apos;s wallet pays every model over x402; each payment is verified on chain and runs exactly one council, and if no seat answers the payment is refunded automatically. Provider, USDC and Solana logos across the site.
                 </div>
               </li>
               <li>

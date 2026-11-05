@@ -4,6 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Command } from "@/components/Copy";
 import { commands, KIT_VERSION } from "@/lib/site";
+import { Logo } from "@/components/Logo";
 
 export const metadata: Metadata = { title: "Docs", description: "Install, fund, ask, convene, pay and wire Council into any MCP client." };
 
@@ -52,16 +53,16 @@ export default async function Docs() {
           <table>
             <thead><tr><th>Alias</th><th>Family</th><th>Tried in order</th></tr></thead>
             <tbody>
-              <tr><td><code>venice</code></td><td>Venice Uncensored</td><td>Venice</td></tr>
-              <tr><td><code>claude</code></td><td>Claude Sonnet</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>gpt</code></td><td>GPT</td><td>BlockRun, then Venice (gpt-oss)</td></tr>
-              <tr><td><code>grok</code></td><td>Grok</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>gemini</code></td><td>Gemini Flash</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>deepseek</code></td><td>DeepSeek Pro</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>kimi</code></td><td>Kimi Pro</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>qwen</code></td><td>Qwen Max</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>glm</code></td><td>GLM</td><td>Venice, then BlockRun</td></tr>
-              <tr><td><code>mistral</code></td><td>Mistral Large</td><td>BlockRun, then Venice</td></tr>
+              <tr><td><code>venice</code></td><td><Logo k="venice" size={16} />Venice Uncensored</td><td>Venice</td></tr>
+              <tr><td><code>claude</code></td><td><Logo k="claude" size={16} />Claude Sonnet</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>gpt</code></td><td><Logo k="gpt" size={16} />GPT</td><td>BlockRun, then Venice (gpt-oss)</td></tr>
+              <tr><td><code>grok</code></td><td><Logo k="grok" size={16} />Grok</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>gemini</code></td><td><Logo k="gemini" size={16} />Gemini Flash</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>deepseek</code></td><td><Logo k="deepseek" size={16} />DeepSeek Pro</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>kimi</code></td><td><Logo k="kimi" size={16} />Kimi Pro</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>qwen</code></td><td><Logo k="qwen" size={16} />Qwen Max</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>glm</code></td><td><Logo k="glm" size={16} />GLM</td><td>Venice, then BlockRun</td></tr>
+              <tr><td><code>mistral</code></td><td><Logo k="mistral" size={16} />Mistral Large</td><td>BlockRun, then Venice</td></tr>
             </tbody>
           </table>
           <p>To pin an exact model, use <code>venice:&lt;id&gt;</code> or <code>blockrun:&lt;id&gt;</code>, for example <code>blockrun:openai/gpt-5.5</code>.</p>

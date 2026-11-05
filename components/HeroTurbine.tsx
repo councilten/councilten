@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { BLADES, BLADE_DIR, RING_CENTER as C, RING_R as R } from "@/lib/mark";
+import { Logo } from "./Logo";
 
 export interface SeatInfo {
   alias: string;
@@ -92,7 +93,7 @@ export function HeroTurbine({ seats }: { seats: SeatInfo[] }) {
         {s ? (
           <>
             <span className="ht-n num">Seat {pad((active ?? 0) + 1)}</span>
-            <b>{s.label}</b>
+            <b className="ht-name"><Logo k={s.alias} size={18} />{s.label}</b>
             <span className="num">{s.id ?? "unavailable"}</span>
             {s.provider && <span>via {s.provider}</span>}
             {s.input !== null && <span className="num">${s.input.toFixed(2)} / ${s.output!.toFixed(2)} per M</span>}

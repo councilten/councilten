@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import { BLADES } from "@/lib/mark";
 import { Command } from "./Copy";
+import { Logo } from "./Logo";
 
 export interface PriceSeat {
   alias: string;
@@ -53,7 +54,7 @@ export function Pricer({ seats, judgeAlias = "claude" }: { seats: PriceSeat[]; j
         <div className="pr-seats" role="group" aria-label="Seats at the table">
           {seats.map((s) => (
             <button key={s.alias} type="button" className="pr-seat" aria-pressed={on.has(s.alias)} onClick={() => toggle(s.alias)}>
-              <span className="a">{s.alias}</span>
+              <span className="a"><Logo k={s.alias} size={16} />{s.alias}</span>
               <span className="id">{s.id}</span>
             </button>
           ))}
@@ -94,7 +95,7 @@ export function Pricer({ seats, judgeAlias = "claude" }: { seats: PriceSeat[]; j
         <ul className="pr-rows">
           {r.rows.map(({ s, usd: u }) => (
             <li key={s.alias}>
-              <span>{s.alias}</span>
+              <span className="pr-n"><Logo k={s.alias} size={14} />{s.alias}</span>
               <span className="bar"><i style={{ transform: `scaleX(${u / max})` }} /></span>
               <span className="num">{usd(u)}</span>
             </li>
